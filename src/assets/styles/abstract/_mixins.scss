@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 @mixin title-style {
-  font-family: $font-family;
+  font-family: $primary-font;
   font-weight: $font-weight-semi-bold;
   font-size: $font-size-36;
   color: $color-primary;
@@ -9,7 +9,7 @@
 }
 
 @mixin label-style {
-  font-family: $font-family;
+  font-family: $primary-font;
   font-weight: $font-weight-regular;
   font-size: $font-size-16;
   line-height: $line-height-22;
@@ -17,7 +17,7 @@
 }
 
 @mixin button-style {
-  font-family: $font-family;
+  font-family: $primary-font;
   font-weight: $font-weight-medium;
   font-size: $font-size-16;
   line-height: $line-height-18;
@@ -41,7 +41,7 @@
 }
 
 @mixin text-style-base {
-  font-family: $font-family;
+  font-family: $primary-font;
   font-weight: $font-weight-semi-bold;
   font-size: $font-size-16;
   line-height: $line-height-22;

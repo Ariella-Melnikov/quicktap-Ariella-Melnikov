@@ -1,0 +1,53 @@
+@use '../../assets/styles/abstract' as *;
+
+.story-board {
+  width: 1400px;
+  height: 700px;
+  padding: 170px 440px;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid #BCBDBB;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  flex-shrink: 0;
+
+  .story-board-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #BCBDBB;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+
+    .player-name {
+      font-family: $primary-font;
+      font-size: 24px;
+      font-weight: 600;
+      color: black;
+    }
+
+    .score {
+      color: #EA3784;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+
+  .story-board-content {
+    height: calc(100% - 70px);
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+  }
+} 
