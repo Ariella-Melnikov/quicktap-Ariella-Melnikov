@@ -1,14 +1,19 @@
-import { ReactNode, ButtonHTMLAttributes } from 'react'
-import './SecondaryButton.scss'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode
-}
+import { Button, ButtonProps, styled } from '@mui/material'
 
-export function SecondaryButton({ children, ...props }: Props) {
-  return (
-    <button className="secondary-button" {...props}>
-      {children}
-    </button>
-  )
-}
+const SecondaryButton = styled(Button)<ButtonProps>(() => ({
+  backgroundColor: '#FFFFFF',
+  color: '#212121',
+  border: '1px solid #BCBDBB',
+  borderRadius: '8px',
+  padding: '12px 24px',
+  textTransform: 'none',
+  fontWeight: 500,
+  fontSize: '16px',
+  lineHeight: '22px',
+  '&:hover': {
+    backgroundColor: '#F5F5F5',
+  },
+}))
+
+export default SecondaryButton
