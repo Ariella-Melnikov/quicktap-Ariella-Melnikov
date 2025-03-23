@@ -12,7 +12,7 @@ const StyledButton = styled(Button)(() => ({
   lineHeight: '22px',
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: '4px',
 
   '&:hover': {
     backgroundColor: '#000000',
