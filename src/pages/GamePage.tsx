@@ -126,8 +126,8 @@ export function GamePage() {
         <div className='game-page'>
             <StoryBoard playerName={username} score={score}>
                 <div className='game-container'>
-                    {direction && <div className={`color-mark ${direction} ${gameState}`} />}
-                    {feedback && <div className='feedback'>{feedback}</div>}
+                {direction && <div className={`color-mark ${direction} ${gameState}`} />}
+                {feedback && <div className='feedback'>{feedback}</div>}
                 </div>
             </StoryBoard>
         </div>
