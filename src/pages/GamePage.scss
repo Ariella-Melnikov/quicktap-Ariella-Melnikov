@@ -52,38 +52,15 @@
             }
         }
 
-        .feedback {
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 600;
-            text-align: center;
-            opacity: 0;
-
-            &.Success {
-                color: #4caf50;
-                animation: fadeIn 0.3s ease-in-out forwards;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
             }
-
-            &.Wrong,
-            &.Too {
-                color: #f44336;
-                animation: fadeIn 0.3s ease-in-out forwards;
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
             }
         }
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
     }
 }

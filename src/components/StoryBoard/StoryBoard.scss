@@ -50,4 +50,28 @@
     position: relative;
     padding: 0;
   }
+
+  .game-feedback {
+    position: absolute;
+    bottom: 32px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 520px; 
+    min-width: 240px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #BCBDBB;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  
+    &.feedback-success {
+      color: #4CAF50;
+    }
+  
+    &.feedback-error {
+      color: #212121;
+    }
+  }
 } 

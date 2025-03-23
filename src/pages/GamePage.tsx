@@ -49,36 +49,25 @@ export function GamePage() {
         const currentGameState = gameStateRef.current
         const currentDirection = directionRef.current
         const code = event.code
-        
-        console.log('Debug:', {
-            pressedKey: code,
-            gameState: currentGameState,
-            direction: currentDirection,
-            isShowingState: currentGameState === 'showing'
-        })
-        
+
         if (currentGameState === 'waiting') {
             setFeedback('Too Soon')
             setGameState('feedback')
             clearTimeout(timeoutRef.current!)
+
+            // Start new round after 1 second
             timeoutRef.current = window.setTimeout(startNewRound, 1000)
             return
         }
-        
+
         if (currentGameState === 'showing' && currentDirection) {
             keyPressedRef.current = true
-            
+
             const isLeftKey = code === 'KeyA'
             const isRightKey = code === 'KeyD'
             const isCorrect = (currentDirection === 'left' && isLeftKey) || (currentDirection === 'right' && isRightKey)
-            
-            console.log('Key Check:', {
-                isLeftKey,
-                isRightKey,
-                direction: currentDirection,
-                isCorrect
-            })
-            
+
+
             if (isCorrect) {
                 setScore(prev => prev + 1)
                 setFeedback('Success')
@@ -89,8 +78,10 @@ export function GamePage() {
             setGameState('feedback')
             clearTimeout(timeoutRef.current!)
             timeoutRef.current = window.setTimeout(startNewRound, 1000)
+
         }
     }
+
 
     useEffect(() => {
         gameStateRef.current = gameState
@@ -103,12 +94,12 @@ export function GamePage() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress)
         startNewRound()
-      
+
         return () => {
-          window.removeEventListener('keydown', handleKeyPress)
-          clearTimeout(timeoutRef.current!)
+            window.removeEventListener('keydown', handleKeyPress)
+            clearTimeout(timeoutRef.current!)
         }
-      }, [])
+    }, [])
 
     useEffect(() => {
         return () => {
@@ -124,10 +115,13 @@ export function GamePage() {
 
     return (
         <div className='game-page'>
-            <StoryBoard playerName={username} score={score}>
+            <StoryBoard
+                playerName={username}
+                score={score}
+                feedback={feedback}
+                onCloseFeedback={() => setFeedback(null)}>
                 <div className='game-container'>
-                <div className={`color-mark ${direction || ''} ${gameState}`} />
-                {feedback && <div className='feedback'>{feedback}</div>}
+                    <div className={`color-mark ${direction || ''} ${gameState}`} />
                 </div>
             </StoryBoard>
         </div>
