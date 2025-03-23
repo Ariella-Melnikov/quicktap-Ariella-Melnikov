@@ -6,14 +6,15 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import './StoryBoard.scss'
 
 interface StoryBoardProps {
-    playerName: string
-    score: number
-    children: ReactNode
-    feedback?: string | null
-    onCloseFeedback?: () => void
+    playerName: string,
+    score?: number,
+    children: ReactNode,
+    feedback?: string | null,
+    onCloseFeedback?: () => void,
+    centerHeader?: boolean
 }
 
-export function StoryBoard({ playerName, score, children, feedback, onCloseFeedback }: StoryBoardProps) {
+export function StoryBoard({ playerName, score, children, feedback, onCloseFeedback, centerHeader }: StoryBoardProps) {
     const getFeedbackClass = (feedback?: string | null) => {
         if (feedback === 'Success') return 'feedback-success'
         if (feedback === 'Too Soon' || feedback === 'Too Late' || feedback === 'Wrong Key') return 'feedback-error'
@@ -32,9 +33,9 @@ export function StoryBoard({ playerName, score, children, feedback, onCloseFeedb
 
     return (
         <div className='story-board'>
-            <header className='story-board-header'>
+            <header className={`story-board-header ${centerHeader ? 'center' : ''}`}>
                 <span className='player-name'>{playerName}</span>
-                <span className='score'>{score}</span>
+                {!centerHeader && <span className='score'>{score}</span>}
             </header>
 
             <main className='story-board-content'>{children}</main>
