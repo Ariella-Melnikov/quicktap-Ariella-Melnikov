@@ -1,0 +1,16 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+  
+    .username-input {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 300px;
+    }
+  
+    .start-button {
+      width: 200px;
+    }
+  }
