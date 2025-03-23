@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { getLeaderboard } from '../services/leaderboard.service'
+import { getLeaderboard } from '../../services/leaderboard.service'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Box } from '@mui/material'
-import PrimaryButton from '../components/buttons/PrimaryButton'
+import PrimaryButton from '../../components/buttons/PrimaryButton'
 import { useNavigate } from 'react-router-dom'
-import crownIcon from '../assets/icons/crown.svg'
+import crownIcon from '../../assets/icons/crown.svg'
 import SendIcon from '@mui/icons-material/Send'
 import './LeaderboardPage.scss'
 

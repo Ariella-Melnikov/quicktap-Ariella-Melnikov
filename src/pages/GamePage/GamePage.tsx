@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { StoryBoard } from '../components/StoryBoard/StoryBoard'
+import { StoryBoard } from '../../components/StoryBoard/StoryBoard'
 import { useNavigate } from 'react-router-dom'
-import PrimaryButton from '../components/buttons/PrimaryButton'
-import { saveScore } from '../services/saveScore.service'
+import PrimaryButton from '../../components/buttons/PrimaryButton'
+import { saveScore } from '../../services/saveScore.service'
+import colorMarkIcon from '../../assets/icons/colorMark.svg'
 import './GamePage.scss'
 
 type GameState = 'waiting' | 'showing' | 'feedback'
@@ -120,7 +121,11 @@ export function GamePage() {
                 onCloseFeedback={() => setFeedback(null)}>
                 <div className='game-container'>
                     {gameState === 'waiting' && <div className='waiting-loader' />}
-                    <div className={`color-mark ${direction || ''} ${gameState}`} />
+                    <img 
+                        src={colorMarkIcon} 
+                        alt="color mark"
+                        className={`color-mark ${direction || ''} ${gameState}`}
+                    />
                 </div>
                 <div className='end-game-button'>
                     <PrimaryButton onClick={handleGameOver}>End Game</PrimaryButton>

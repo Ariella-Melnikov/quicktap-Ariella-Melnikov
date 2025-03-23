@@ -1,8 +1,8 @@
 // pages/GameOverPage.tsx
 import { useNavigate } from 'react-router-dom'
-import { StoryBoard } from '../components/StoryBoard/StoryBoard'
-import PrimaryButton from '../components/buttons/PrimaryButton'
-import SecondaryButton from '../components/buttons/SecondaryButton'
+import { StoryBoard } from '../../components/StoryBoard/StoryBoard'
+import PrimaryButton from '../../components/buttons/PrimaryButton'
+import SecondaryButton from '../../components/buttons/SecondaryButton'
 import SendIcon from '@mui/icons-material/Send'
 import './GameOverPage.scss'
 

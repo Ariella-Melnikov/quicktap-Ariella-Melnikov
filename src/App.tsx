@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import { SigninPage } from './pages/SigninPage'
+import { SigninPage } from './pages/SigninPage/SigninPage'
 import { AppHeader } from './components/AppHeader/AppHeader'
-import { GamePage } from './pages/GamePage'
-import { GameOverPage } from './pages/GameOverPage'
-import { LeaderboardPage } from './pages/LeaderboardPage'
+import { GamePage } from './pages/GamePage/GamePage'
+import { GameOverPage } from './pages/GameOverPage/GameOverPage'
+import { LeaderboardPage } from './pages/LeaderboardPage/LeaderboardPage'
 
 function App() {
   return (

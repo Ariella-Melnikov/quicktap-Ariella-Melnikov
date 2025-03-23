@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { startGame } from '../services/user.service'
+import { startGame } from '../../services/user.service'
 import SendIcon from '@mui/icons-material/Send'
-import  PrimaryButton  from '../components/buttons/PrimaryButton'
+import  PrimaryButton  from '../../components/buttons/PrimaryButton'
 import './SigninPage.scss'
 
 export function SigninPage() {

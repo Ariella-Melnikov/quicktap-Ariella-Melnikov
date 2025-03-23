@@ -14,26 +14,13 @@
         align-items: center;
 
         .color-mark {
-            width: 82px;
-            height: 82px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 102px;
+            height: 102px;
             position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             opacity: 0;
             will-change: opacity;
 
-            &::after {
-                content: '';
-                width: 52.18px;
-                height: 52.18px;
-                background-color: #ea3784;
-                border-radius: 10px;
-            }
-
+            
             &.left {
                 left: 238px;
             }
