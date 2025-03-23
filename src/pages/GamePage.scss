@@ -60,20 +60,26 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(90deg, #E6D4DC 0%, #BCD9DA 100%);
+            background: linear-gradient(90deg, #e6d4dc 0%, #bcd9da 100%);
             background-size: 200% 100%;
             animation: pulse-loader 2s ease-in-out infinite;
             z-index: 2;
-          
 
-          @keyframes pulse-loader {
-            0% {
-              background-position: 200% 0;
+            @keyframes pulse-loader {
+                0% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+                }
             }
-            100% {
-              background-position: -200% 0;
-            }
-          }
         }
+    }
+    .end-game-button {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9;
     }
 }

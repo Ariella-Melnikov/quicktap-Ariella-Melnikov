@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { StoryBoard } from '../components/StoryBoard/StoryBoard'
+import { useNavigate } from 'react-router-dom'
 import './GamePage.scss'
+import { PrimaryButton } from '../components/buttons/PrimaryButton'
 
 type GameState = 'waiting' | 'showing' | 'feedback'
 type Direction = 'left' | 'right'
@@ -11,6 +13,8 @@ export function GamePage() {
     const [direction, setDirection] = useState<Direction | null>(null)
     const [score, setScore] = useState(0)
     const [feedback, setFeedback] = useState<FeedbackType>(null)
+
+    const navigate = useNavigate()
 
     const gameStateRef = useRef<GameState>('waiting')
     const directionRef = useRef<Direction | null>(null)
@@ -67,21 +71,23 @@ export function GamePage() {
             const isRightKey = code === 'KeyD'
             const isCorrect = (currentDirection === 'left' && isLeftKey) || (currentDirection === 'right' && isRightKey)
 
-
             if (isCorrect) {
-                setScore(prev => prev + 1)
+                setScore((prev) => prev + 1)
                 setFeedback('Success')
             } else {
                 setFeedback('Wrong Key')
             }
-            
+
             setGameState('feedback')
             clearTimeout(timeoutRef.current!)
             timeoutRef.current = window.setTimeout(startNewRound, 1000)
-
         }
     }
 
+    const handleGameOver = () => {
+        localStorage.setItem('score', score.toString())
+        navigate('/gameover')
+    }
 
     useEffect(() => {
         gameStateRef.current = gameState
@@ -121,8 +127,11 @@ export function GamePage() {
                 feedback={feedback}
                 onCloseFeedback={() => setFeedback(null)}>
                 <div className='game-container'>
-                {gameState === 'waiting' && <div className="waiting-loader" />}
+                    {gameState === 'waiting' && <div className='waiting-loader' />}
                     <div className={`color-mark ${direction || ''} ${gameState}`} />
+                </div>
+                <div className='end-game-button'>
+                    <PrimaryButton onClick={handleGameOver}>End Game</PrimaryButton>
                 </div>
             </StoryBoard>
         </div>
