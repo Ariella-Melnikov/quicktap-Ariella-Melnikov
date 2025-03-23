@@ -121,6 +121,7 @@ export function GamePage() {
                 feedback={feedback}
                 onCloseFeedback={() => setFeedback(null)}>
                 <div className='game-container'>
+                {gameState === 'waiting' && <div className="waiting-loader" />}
                     <div className={`color-mark ${direction || ''} ${gameState}`} />
                 </div>
             </StoryBoard>
