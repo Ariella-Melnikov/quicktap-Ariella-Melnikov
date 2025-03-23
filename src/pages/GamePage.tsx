@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { StoryBoard } from '../components/StoryBoard/StoryBoard'
 import { useNavigate } from 'react-router-dom'
+import PrimaryButton from '../components/buttons/PrimaryButton'
+import { saveScore } from '../services/saveScore.service'
 import './GamePage.scss'
-import { PrimaryButton } from '../components/buttons/PrimaryButton'
 
 type GameState = 'waiting' | 'showing' | 'feedback'
 type Direction = 'left' | 'right'
@@ -84,7 +85,10 @@ export function GamePage() {
         }
     }
 
-    const handleGameOver = () => {
+    const handleGameOver = async () => {
+        if (score > 0 && userId) {
+            await saveScore({ userId, username, score })
+        }
         localStorage.setItem('score', score.toString())
         navigate('/gameover')
     }
@@ -106,19 +110,7 @@ export function GamePage() {
             clearTimeout(timeoutRef.current!)
         }
     }, [])
-
-    useEffect(() => {
-        return () => {
-            if (score > 0 && userId) {
-                fetch('https://quicktap-backend-219181450324.us-central1.run.app/api/saveScore', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId, username, score }),
-                }).catch(console.error)
-            }
-        }
-    }, [score, userId, username])
-
+    
     return (
         <div className='game-page'>
             <StoryBoard
