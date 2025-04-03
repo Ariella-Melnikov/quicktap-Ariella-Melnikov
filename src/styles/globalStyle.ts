@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import bgImage from '../../assets/img/BG.png'; 
+import { createGlobalStyle } from 'styled-components'
+import bgImage from '../assets/img/BG.png'
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
-    font-family: ${({ theme }) => theme.fonts.primary};
+    font-family: ${({ theme }) => theme.baseTheme.fonts.primary};
   }
 
   *, *::before, *::after {
@@ -19,4 +19,4 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`;
+`

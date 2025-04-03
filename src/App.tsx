@@ -1,19 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
-import { SigninPage } from './pages/SigninPage/SigninPage'
-import { AppHeader } from './components/AppHeader/AppHeader'
-import { GamePage } from './pages/GamePage/GamePage'
-import { GameOverPage } from './pages/GameOverPage/GameOverPage'
-import { LeaderboardPage } from './pages/LeaderboardPage/LeaderboardPage'
+// import { GamePage } from './pages/GamePage/GamePage'
+// import { GameOverPage } from './pages/GameOverPage/GameOverPage'
+// import { LeaderboardPage } from './pages/LeaderboardPage/LeaderboardPage'
+import HomePage from './pages/HomePage/HomePage'
+import AppLayout from './components/layout/AppLayout'
 
 function App() {
   return (
     <>
-    <AppHeader />
     <Routes>
-      <Route path="/" element={<SigninPage />} />
-      <Route path="/game" element={<GamePage />} />
+    <Route path="/" element={<AppLayout><HomePage /></AppLayout>} />
+      {/* <Route path="/game" element={<GamePage />} />
       <Route path="/gameover" element={<GameOverPage />} />
-      <Route path="/leaderboard" element={<LeaderboardPage />} />
+      <Route path="/leaderboard" element={<LeaderboardPage />} /> */}
     </Routes>
       </>
   )

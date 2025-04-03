@@ -1,20 +1,19 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
-import { muiTheme, baseTheme } from './styles/theme';
+import { muiTheme } from './styles/theme'; // ✅ only import muiTheme
 import { GlobalStyle } from './styles/globalStyle';
 
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-<MuiThemeProvider theme={muiTheme}>
-  <ThemeProvider theme={baseTheme}>
-    <CssBaseline />
-    <GlobalStyle />
-    <App />
-  </ThemeProvider>
-</MuiThemeProvider>
-  </React.StrictMode>
+  <MuiThemeProvider theme={muiTheme}>
+    <StyledThemeProvider theme={muiTheme}>
+      <BrowserRouter>
+        <CssBaseline />
+        <GlobalStyle />
+        <App />
+      </BrowserRouter>
+    </StyledThemeProvider>
+  </MuiThemeProvider>
 );
