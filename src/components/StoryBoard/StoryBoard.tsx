@@ -1,58 +1,47 @@
+// StoryBoard.tsx
 import { ReactNode } from 'react'
-import { Alert, IconButton } from '@mui/material'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import CloseIcon from '@mui/icons-material/Close'
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-import './StoryBoard.scss'
-
-interface StoryBoardProps {
-    playerName: string,
-    score?: number,
-    children: ReactNode,
-    feedback?: string | null,
-    onCloseFeedback?: () => void,
-    centerHeader?: boolean
+import PrimaryButton from '../ui/PrimaryButton'
+import {
+    StoryBoardContainer,
+    Header,
+    PlayerName,
+    PlayerScore,
+    Content,
+    EndGameButton,
+} from './StoryBoard.styled'
+import ToastMessage from '../ui/ToastMessage'
+interface Props {
+    playerName: string
+    score: number
+    feedback: string | null
+    onCloseFeedback: () => void
+    onEndGame: () => void
+    endGameBtnLabel: string
+    children: ReactNode
 }
 
-export function StoryBoard({ playerName, score, children, feedback, onCloseFeedback, centerHeader }: StoryBoardProps) {
-    const getFeedbackClass = (feedback?: string | null) => {
-        if (feedback === 'Success') return 'feedback-success'
-        if (feedback === 'Too Soon' || feedback === 'Too Late' || feedback === 'Wrong Key') return 'feedback-error'
-        return ''
-    }
-
-    const getFeedbackIcon = (feedback?: string | null) => {
-        if (feedback === 'Success') {
-            return <CheckCircleIcon sx={{ color: '#4CAF50', mr: 1 }} />
-        }
-        if (feedback === 'Too Soon' || feedback === 'Too Late' || feedback === 'Wrong Key') {
-            return <ErrorOutlineIcon sx={{ color: '#212121', mr: 1 }} />
-        }
-        return null
-    }
-
+const StoryBoard = ({ playerName, score, feedback, onCloseFeedback, onEndGame, endGameBtnLabel, children }: Props) => {
     return (
-        <div className='story-board'>
-            <header className={`story-board-header ${centerHeader ? 'center' : ''}`}>
-                <span className='player-name'>{playerName}</span>
-                {!centerHeader && <span className='score'>{score}</span>}
-            </header>
+        <StoryBoardContainer>
+            <Header>
+                <PlayerName>{playerName}</PlayerName>
+                <PlayerScore>Score: {score}</PlayerScore>
+            </Header>
 
-            <main className='story-board-content'>{children}</main>
+            <Content>{children}</Content>
+
             {feedback && (
-                <Alert
-                    className={`game-feedback ${getFeedbackClass(feedback)}`}
-                    variant='outlined'
-                    icon={getFeedbackIcon(feedback)}
+                <ToastMessage
+                    type={feedback === 'Success' ? 'success' : 'error'}
+                    message={feedback}
                     onClose={onCloseFeedback}
-                    action={
-                        <IconButton aria-label='close' color='inherit' size='small' onClick={onCloseFeedback}>
-                            <CloseIcon fontSize='inherit' />
-                        </IconButton>
-                    }>
-                    {feedback}
-                </Alert>
+                />
             )}
-        </div>
+            <EndGameButton>
+                <PrimaryButton onClick={onEndGame}>{endGameBtnLabel}</PrimaryButton>
+            </EndGameButton>
+        </StoryBoardContainer>
     )
 }
+
+export default StoryBoard

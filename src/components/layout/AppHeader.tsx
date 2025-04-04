@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // ✅ Drop shadow
+  box-shadow: ${({ theme }) => theme.baseTheme.shadows.drop};
 `;
 
 const LogoText = styled.div`

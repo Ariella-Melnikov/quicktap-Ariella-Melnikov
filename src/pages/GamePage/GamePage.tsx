@@ -1,31 +1,35 @@
 import { useEffect, useRef, useState } from 'react'
-import { StoryBoard } from '../../components/StoryBoard/StoryBoard'
 import { useNavigate } from 'react-router-dom'
-import PrimaryButton from '../../components/buttons/PrimaryButton'
 import { saveScore } from '../../services/saveScore.service'
 import colorMarkIcon from '../../assets/icons/colorMark.svg'
-import './GamePage.scss'
+import PrimaryButton from '../../components/ui/PrimaryButton'
+import StoryBoard from '../../components/StoryBoard/StoryBoard'
+import { GameContainer, ColorMark, EndGameButton } from './GamePage.styled'
+import WaitingLoader from '../../components/ui/WaitingLoader'
 
 type GameState = 'waiting' | 'showing' | 'feedback'
 type Direction = 'left' | 'right'
 type FeedbackType = 'Too Soon' | 'Wrong Key' | 'Too Late' | 'Success' | null
 
-export function GamePage() {
+const GamePage = () => {
     const [gameState, setGameState] = useState<GameState>('waiting')
     const [direction, setDirection] = useState<Direction | null>(null)
     const [score, setScore] = useState(0)
     const [feedback, setFeedback] = useState<FeedbackType>(null)
 
     const navigate = useNavigate()
-
-    const gameStateRef = useRef<GameState>('waiting')
-    const directionRef = useRef<Direction | null>(null)
-
     const username = localStorage.getItem('username') || 'Player'
     const userId = localStorage.getItem('userId') || ''
 
     const timeoutRef = useRef<number | null>(null)
-    const keyPressedRef = useRef<boolean>(false)
+    const gameStateRef = useRef(gameState)
+    const directionRef = useRef(direction)
+    const keyPressedRef = useRef(false)
+
+    useEffect(() => {
+        gameStateRef.current = gameState
+        directionRef.current = direction
+    }, [gameState, direction])
 
     const startNewRound = () => {
         setGameState('waiting')
@@ -52,33 +56,25 @@ export function GamePage() {
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
-        const currentGameState = gameStateRef.current
-        const currentDirection = directionRef.current
         const code = event.code
 
-        if (currentGameState === 'waiting') {
+        if (gameStateRef.current === 'waiting') {
             setFeedback('Too Soon')
             setGameState('feedback')
             clearTimeout(timeoutRef.current!)
-
-            // Start new round after 1 second
             timeoutRef.current = window.setTimeout(startNewRound, 1000)
             return
         }
 
-        if (currentGameState === 'showing' && currentDirection) {
+        if (gameStateRef.current === 'showing' && directionRef.current) {
             keyPressedRef.current = true
 
-            const isLeftKey = code === 'KeyA'
-            const isRightKey = code === 'KeyD'
-            const isCorrect = (currentDirection === 'left' && isLeftKey) || (currentDirection === 'right' && isRightKey)
+            const isCorrect =
+                (directionRef.current === 'left' && code === 'KeyA') ||
+                (directionRef.current === 'right' && code === 'KeyD')
 
-            if (isCorrect) {
-                setScore((prev) => prev + 1)
-                setFeedback('Success')
-            } else {
-                setFeedback('Wrong Key')
-            }
+            setFeedback(isCorrect ? 'Success' : 'Wrong Key')
+            if (isCorrect) setScore((prev) => prev + 1)
 
             setGameState('feedback')
             clearTimeout(timeoutRef.current!)
@@ -95,14 +91,6 @@ export function GamePage() {
     }
 
     useEffect(() => {
-        gameStateRef.current = gameState
-    }, [gameState])
-
-    useEffect(() => {
-        directionRef.current = direction
-    }, [direction])
-
-    useEffect(() => {
         window.addEventListener('keydown', handleKeyPress)
         startNewRound()
 
@@ -111,26 +99,19 @@ export function GamePage() {
             clearTimeout(timeoutRef.current!)
         }
     }, [])
-    
+
     return (
-        <div className='game-page'>
-            <StoryBoard
-                playerName={username}
-                score={score}
-                feedback={feedback}
-                onCloseFeedback={() => setFeedback(null)}>
-                <div className='game-container'>
-                    {gameState === 'waiting' && <div className='waiting-loader' />}
-                    <img 
-                        src={colorMarkIcon} 
-                        alt="color mark"
-                        className={`color-mark ${direction || ''} ${gameState}`}
-                    />
-                </div>
-                <div className='end-game-button'>
-                    <PrimaryButton onClick={handleGameOver}>End Game</PrimaryButton>
-                </div>
-            </StoryBoard>
-        </div>
+        <StoryBoard playerName={username} score={score} feedback={feedback} onCloseFeedback={() => setFeedback(null)} onEndGame={handleGameOver} endGameBtnLabel='End Game'>
+            <GameContainer>
+                {gameState === 'waiting' && <WaitingLoader />}
+                <ColorMark
+                    src={colorMarkIcon}
+                    alt='color mark'
+                    $position={direction || 'left'}
+                    $visible={gameState === 'showing'}
+                />
+            </GameContainer>
+        </StoryBoard>
     )
 }
+export default GamePage

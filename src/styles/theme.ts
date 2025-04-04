@@ -20,6 +20,7 @@ export const baseTheme = {
   spacingValues: {
     xs: '4px',
     sm: '8px',
+    sm2: '10px',
     md: '12px',
     lg: '16px',
     xl: '24px',
@@ -54,6 +55,10 @@ export const baseTheme = {
     md: '8px',
     lg: '12px',
   },
+  customSpacing: {
+    storyboardMarginX: '35px',
+    storyboardMarginY: '30px',
+  },
   breakpoints: {
     sm: '600px',
     md: '900px',
@@ -62,12 +67,14 @@ export const baseTheme = {
   },
   shadows: {
     drop: '0px 5px 16px 0px rgba(12, 12, 12, 0.3)', 
+    droplight: '0px 4px 14px 0px rgba(33, 39, 33, 0.14)',
+    dropsoft: '0px 0px 50px 1px rgba(0, 0, 0, 0.1)',
+    dropheader: '0px 5px 16px 0 rgba(0, 0, 0, 0.1)',
   },
 } as const;
 
-// 🎯 Create MUI-compatible theme and attach baseTheme to it
 export const muiTheme = createTheme({
-  spacing: 4, // enables spacing(n) = n * 4px
+  spacing: 4,
   typography: {
     fontFamily: baseTheme.fonts.primary,
   },
@@ -83,8 +90,6 @@ export const muiTheme = createTheme({
   },
 }) as Theme & { baseTheme: typeof baseTheme };
 
-// 🔥 Add your baseTheme tokens into the MUI theme object
 (muiTheme as any).baseTheme = baseTheme;
 
-// ✅ This is your final theme used everywhere
 export type AppTheme = typeof muiTheme;
