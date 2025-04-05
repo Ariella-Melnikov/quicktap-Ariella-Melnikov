@@ -1,22 +1,21 @@
 import styled from 'styled-components'
-
 interface Props {
-    children: string
+  children: string
+  color?: 'red' | 'primary'
 }
 
-const PageTitle = ({ children }: Props) => {
-    return <StyledTitle>{children}</StyledTitle>
-}
+const PageTitle = ({ children, color = 'primary' }: Props) => {
+    return <StyledTitle $color={color}>{children}</StyledTitle>
+  }
 
 export default PageTitle
 
-const StyledTitle = styled.h1`
-    font-size: ${({ theme }) => theme.baseTheme.fontSizes.xxxl};
-    color: ${({ theme }) => theme.baseTheme.colors.primary};
-    font-family: ${({ theme }) => theme.baseTheme.fonts.primary};
-    font-weight: 600;
-    text-align: center;
-    width: auto; 
-    margin: 0 auto; 
-    display: inline-block; 
+const StyledTitle = styled.h1<{ $color: 'red' | 'primary' }>`
+  font-size: ${({ theme }) => theme.baseTheme.fontSizes.xxxl};
+  font-family: ${({ theme }) => theme.baseTheme.fonts.primary};
+  font-weight: ${({ theme }) => theme.baseTheme.fontWeights.bold};
+  color: ${({ $color, theme }) =>
+    $color === 'red' ? theme.baseTheme.colors.info.red : theme.baseTheme.colors.primary};
+  text-align: center;
+  margin: 0;
 `

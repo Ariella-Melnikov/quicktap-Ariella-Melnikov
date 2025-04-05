@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { saveScore } from '../../services/saveScore.service'
 import colorMarkIcon from '../../assets/icons/colorMark.svg'
-import PrimaryButton from '../../components/ui/PrimaryButton'
 import StoryBoard from '../../components/StoryBoard/StoryBoard'
-import { GameContainer, ColorMark, EndGameButton } from './GamePage.styled'
+import { GameContainer, ColorMark } from './GamePage.styled'
 import WaitingLoader from '../../components/ui/WaitingLoader'
 
 type GameState = 'waiting' | 'showing' | 'feedback'
@@ -101,7 +100,8 @@ const GamePage = () => {
     }, [])
 
     return (
-        <StoryBoard playerName={username} score={score} feedback={feedback} onCloseFeedback={() => setFeedback(null)} onEndGame={handleGameOver} endGameBtnLabel='End Game'>
+        <StoryBoard playerName={username} score={score} showScoreInHeader={true} feedback={feedback} onCloseFeedback={() => setFeedback(null)} onEndGame={handleGameOver}
+        endGameBtnLabel="End Game">
             <GameContainer>
                 {gameState === 'waiting' && <WaitingLoader />}
                 <ColorMark

@@ -1,31 +1,36 @@
-// StoryBoard.tsx
 import { ReactNode } from 'react'
 import PrimaryButton from '../ui/PrimaryButton'
-import {
-    StoryBoardContainer,
-    Header,
-    PlayerName,
-    PlayerScore,
-    Content,
-    EndGameButton,
-} from './StoryBoard.styled'
+import { StoryBoardContainer, Header, PlayerName, PlayerScore, Content, EndGameButton, PlayerNameWrapper } from './StoryBoard.styled'
 import ToastMessage from '../ui/ToastMessage'
+
 interface Props {
     playerName: string
     score: number
+    showScoreInHeader?: boolean
     feedback: string | null
     onCloseFeedback: () => void
-    onEndGame: () => void
-    endGameBtnLabel: string
     children: ReactNode
+    onEndGame?: () => void
+    endGameBtnLabel?: string
 }
 
-const StoryBoard = ({ playerName, score, feedback, onCloseFeedback, onEndGame, endGameBtnLabel, children }: Props) => {
+const StoryBoard = ({
+    playerName,
+    score,
+    feedback,
+    onCloseFeedback,
+    onEndGame,
+    endGameBtnLabel,
+    showScoreInHeader = false,
+    children,
+}: Props) => {
     return (
         <StoryBoardContainer>
-            <Header>
-                <PlayerName>{playerName}</PlayerName>
-                <PlayerScore>Score: {score}</PlayerScore>
+            <Header $center={!showScoreInHeader}>
+                <PlayerNameWrapper $center={!showScoreInHeader}>
+                    <PlayerName>{playerName}</PlayerName>
+                </PlayerNameWrapper>
+                {showScoreInHeader && <PlayerScore>Score: {score}</PlayerScore>}
             </Header>
 
             <Content>{children}</Content>
@@ -37,9 +42,12 @@ const StoryBoard = ({ playerName, score, feedback, onCloseFeedback, onEndGame, e
                     onClose={onCloseFeedback}
                 />
             )}
-            <EndGameButton>
-                <PrimaryButton onClick={onEndGame}>{endGameBtnLabel}</PrimaryButton>
-            </EndGameButton>
+
+            {onEndGame && endGameBtnLabel && (
+                <EndGameButton>
+                    <PrimaryButton onClick={onEndGame}>{endGameBtnLabel}</PrimaryButton>
+                </EndGameButton>
+            )}
         </StoryBoardContainer>
     )
 }

@@ -6,6 +6,7 @@ export const StoryBoardContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-height: 480px;
 
     padding: 170px 440px;
     margin: ${({ theme }) =>
@@ -19,7 +20,7 @@ export const StoryBoardContainer = styled(Box)`
     flex-direction: column;
 `
 
-export const Header = styled(Box)`
+export const Header = styled(Box)<{ $center?: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
@@ -27,7 +28,7 @@ export const Header = styled(Box)`
     height: 70px;
     padding: 0 ${({ theme }) => theme.baseTheme.spacingValues.lg};
     display: flex;
-    justify-content: space-between;
+    justify-content: ${({ $center }) => $center ? 'center' : 'space-between'};
     align-items: center;
     border-bottom: 1px solid #bcbdbb;
     box-shadow: ${({ theme }) => theme.baseTheme.shadows.dropheader};
@@ -52,11 +53,11 @@ export const PlayerScore = styled.span`
 
 export const Content = styled(Box)`
     flex-grow: 1;
-    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+
 `
 
 export const EndGameButton = styled.div`
@@ -64,4 +65,10 @@ export const EndGameButton = styled.div`
   bottom: ${({ theme }) => theme.baseTheme.spacingValues.sm2};
   right: ${({ theme }) => theme.baseTheme.spacingValues.sm2};
   z-index: 9;
+`
+
+export const PlayerNameWrapper = styled.div<{ $center?: boolean }>`
+  flex: 1;
+  display: flex;
+  justify-content: ${({ $center }) => ($center ? 'center' : 'flex-start')};
 `;

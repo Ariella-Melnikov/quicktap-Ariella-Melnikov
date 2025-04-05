@@ -1,5 +1,4 @@
 import { Button } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
 import styled from 'styled-components'
 
 interface Props {
@@ -7,23 +6,22 @@ interface Props {
     onClick?: () => void
 }
 
-const PrimaryButton = ({ children, onClick }: Props) => {
+const SecondaryButton = ({ children, onClick }: Props) => {
     return (
-        <StyledButton variant='contained' onClick={onClick} startIcon={<SendIcon />}>
+        <StyledSecondaryButton variant='outlined' onClick={onClick}>
             {children}
-        </StyledButton>
+        </StyledSecondaryButton>
     )
 }
 
-export default PrimaryButton
+export default SecondaryButton
 
-const StyledButton = styled(Button)`
-    background-color: ${({ theme }) => theme.baseTheme.colors.primary};
-    color: ${({ theme }) => theme.baseTheme.colors.white};
-    box-shadow: ${({ theme }) => theme.baseTheme.shadows.dropButton};
+const StyledSecondaryButton = styled(Button)`
+    background-color: ${({ theme }) => theme.baseTheme.colors.white};
+    color: ${({ theme }) => theme.baseTheme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.baseTheme.colors.primary};
     border-radius: ${({ theme }) => theme.baseTheme.borderRadius.md};
-    min-height: 36px;
-    min-width: 144px;
+    box-shadow: ${({ theme }) => theme.baseTheme.shadows.dropButton};
 
     padding: ${({ theme }) => `${theme.baseTheme.spacingValues.sm} ${theme.baseTheme.spacingValues.md}`};
 
@@ -39,13 +37,10 @@ const StyledButton = styled(Button)`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-shadow: ${({ theme }) => theme.baseTheme.shadows.dropsoft};
 
     &:hover {
-        background-color: ${({ theme }) => theme.baseTheme.colors.primary};
+        background-color: ${({ theme }) => theme.baseTheme.colors.white};
         opacity: 0.9;
-    }
-
-    svg {
-        font-size: ${({ theme }) => theme.baseTheme.fontSizes.lg};
     }
 `
