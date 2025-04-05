@@ -22,7 +22,7 @@ export const SigninBox = styled(Box)`
   background-color: ${({ theme }) => theme.baseTheme.colors.white};
   border-radius: ${({ theme }) => theme.baseTheme.borderRadius.lg};
   padding: ${({ theme }) => theme.baseTheme.spacingValues.lg};
-  box-shadow: ${({ theme }) => theme.baseTheme.shadows.drop};
+  box-shadow: ${({ theme }) => theme.baseTheme.shadows.dropsoft};
 `;
 
 export const FormRow = styled.div`
