@@ -12,6 +12,7 @@ export const baseTheme = {
     pinkBackground: '#FFE0EE',
     white: '#fafafa',
     gray: '#969894',
+    gray3: '#D8D8D8',
     info: {
       red: '#F04747',
       green: '#30A66D',
@@ -70,6 +71,8 @@ export const baseTheme = {
     droplight: '0px 4px 14px 0px rgba(33, 39, 33, 0.14)',
     dropsoft: '0px 0px 50px 1px rgba(0, 0, 0, 0.1)',
     dropheader: '0px 5px 16px 0 rgba(0, 0, 0, 0.1)',
+    dropButton:'0px 0px 10px 0px rgba(0, 0, 0, 0.1)',
+    dropTable: '0px 0px 14px 0px rgba(232, 232, 232, 1)',
   },
 } as const;
 
